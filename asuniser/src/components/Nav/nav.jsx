@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import asuniser from "../../../public/assets/asuniser_logo.svg";
+import React, { useEffect, useState } from 'react';
+import asuniser from "./../../assets/asuniser_logo.svg";
 import "./index.css";
-import { IoSearch } from "react-icons/io5";
 import { MdOutlineAccountCircle, MdTranslate } from "react-icons/md";  // Import translate icon
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useTranslation } from 'react-i18next';
@@ -10,11 +9,25 @@ const Nav = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const { t, i18n } = useTranslation();
-
+  const [isSelected, setIsSelected] = useState("2")
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+  const [scrolled, setScrolled] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   const toggleHamburger = () => {
     setIsHamburgerOpen(!isHamburgerOpen);
   };
@@ -27,9 +40,16 @@ const Nav = () => {
     const newLng = i18n.language === 'az' ? 'ru' : 'az';
     i18n.changeLanguage(newLng);
   };
-
+  const changeSelected = (e) => {
+    if (isSelected) {
+      document.getElementById(isSelected).classList.remove("Selected");
+    }
+    const newSelected = e.target.id;
+    setIsSelected(newSelected);
+    document.getElementById(newSelected).classList.add("Selected");
+  }
   return (
-    <div className='navv'>
+    <div className={`navv ${scrolled ? 'scrolled' : ''}`}>
       <div className="leftnav">
         <div className="icon">
           <img src={asuniser} alt="Logo" />
@@ -42,9 +62,6 @@ const Nav = () => {
         <div className="icons">
           <div className="translate ikoncon" onClick={changeLanguage}>
             <MdTranslate className="ikon" title="Change Language" />
-          </div>
-          <div className="search ikoncon">
-            <IoSearch className="ikon" />
           </div>
           <div className="account ikoncon" onClick={toggleModal}>
             <MdOutlineAccountCircle className="ikon" />
@@ -63,13 +80,9 @@ const Nav = () => {
             </button>
             <div className="modal-content">
               <h2>{t('greeting')}</h2>
-              <button className="google-signin">
-                <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google" />
-                <h2>{t('signin')}</h2>
-              </button>
-              <form>
-                <input type="email" placeholder="Email Address" />
-                <input type="password" placeholder="Password" />
+              <form className='formLS'>
+                <input className='pl' type="email" placeholder="Email Address" />
+                <input className='pl' type="password" placeholder="Password" />
                 <div className="form-footer">
                   <label>
                     <input type="checkbox" />
@@ -79,6 +92,11 @@ const Nav = () => {
                 </div>
               </form>
               <a href="#" className="forgot-password">{t('forgotpass')}</a>
+              <div className="line"></div>
+              <button className="google-signin">
+                <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google" />
+                <h2>{t('signin')}</h2>
+              </button>
             </div>
           </div>
         </div>
@@ -89,11 +107,10 @@ const Nav = () => {
           <div className="overlay" onClick={closeHamburger}></div>
           <div className="side-menu">
             <ul>
-              <li>Option 1</li>
-              <li>Option 2</li>
-              <li>Option 3</li>
-              <li>Option 4</li>
-              <li>Option 5</li>
+              <li id='1' onClick={changeSelected}>{t("Main")}</li>
+              <li id='2' onClick={changeSelected}>{t("alternate")}</li>
+              <li id='3' onClick={changeSelected}>{t("Argo")}</li>
+              <li id='4' onClick={changeSelected}>{t("Contact")}</li>
             </ul>
           </div>
         </>

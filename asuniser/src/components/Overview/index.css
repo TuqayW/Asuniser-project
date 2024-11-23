@@ -1,0 +1,139 @@
+.overview {
+    width: 100%;
+    height: 91.56vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.topp {
+    width: 1200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.titlee {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titlee h1 {
+    font-size: 15px;
+    color: white;
+    font-weight: 400;
+}
+
+.descr {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.descr h1 {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+}
+
+.bott {
+    width: 1200px;
+    height: 680px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px;
+}
+
+.prduct {
+    background-color: rgb(12, 28, 65);
+    border: 1px solid #ddd;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.prduct h1{
+    color: white;
+    font-weight: 400;
+}
+.prduct img{
+    width: 140px;
+    padding: 20px 20px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+@media only screen and (max-width:1300px){
+    .topp{
+        width: 1000px;
+    }
+    .descr h1{
+        font-size: 18px;
+    }
+    .bott{
+        width: 1000px;
+    }
+}
+@media only screen and (max-width:1100px){
+    .topp{
+        width: 800px;
+    }
+    .descr h1{
+        font-size: 18px;
+    }
+    .bott{
+        width: 800px;
+    }
+}
+@media only screen and (max-width:850px){
+    .topp{
+        width: 600px;
+    }
+    .descr h1{
+        font-size: 18px;
+    }
+    .bott{
+        width: 600px;
+        grid-template-columns: repeat(2 , 1fr);
+        height: auto;
+    }
+    .overview{
+        height: auto;
+    }    
+}
+@media only screen and (max-width:500px){
+    .topp{
+        width: 400px;
+    }
+    .descr h1{
+        font-size: 15px;
+        font-weight: 500;
+    }
+    .titlee h1{
+        font-size: 13px;
+    }
+    .titlee{
+        margin-bottom: 10px;
+    }
+    .descr{
+        width: 80%;
+    }
+    .bott{
+        width: 400px;
+        grid-template-columns: repeat(1 , 1fr);
+        height: auto;
+    }
+    .overview{
+        height: auto;
+    }    
+}
